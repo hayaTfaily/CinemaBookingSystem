@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --light: #f6f6f9;
+  --primary: #7153d5;
+  --light-primary: #9fc3e7;
+  --secondary: #4429b8;
+  --grey: #e2e9ff;
+  --dark-grey: #AAAAAA;
+  --dark: #0c0b13;
+  --danger: #D32F2F;
+  --light-danger: #FECDD3;
+  --warning: #FBC02D;
+  --light-warning: #FFF2C6;
+  --success: #388E3C;
+  --light-success: #BBF7D0;
+}
+
+.glass-navbar {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 15px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin-top: 20px;
+  position: fixed; /* or 'absolute', based on your layout */
+  top: 20px; /* adjust as needed */
+  left: 50%; /* adjust as needed */
+  transform: translateX(-50%); /* centers the navbar horizontally */
+  z-index: 1000; /* adjust based on other elements */
+}
+
+.glass-navbar span{
+  color: var(--primary);
+  font-family: 'Vidaloka';
+  font-size: 30px; 
+  font-weight: bold; 
+  text-shadow: 2px 2px 4px #000;
+}
+
+.glass-navbar p{
+  color: var(--grey);
+  font-family: 'Vidaloka';
+  font-size: 15px; 
+  font-weight: bold; 
+  text-shadow: 2px 2px 4px #000;
+}
+
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none; /* Add this line to remove default list styles */
+  padding: 0; /* Remove default padding */
+}
+
+.navbar-links a {
+  position: relative;
+  color: var(--light);
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.navbar-links a::before {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 0%;
+  background-color: var(--primary);
+  position: absolute;
+  bottom: -3px; /* Adjust this value to align the underline properly */
+  transition: all .4s ease-in-out;
+}
+
+.navbar-links a:hover::before {
+  width: 90%;
+}
+
+.glass-navbar button{
+  background: linear-gradient(45deg, #4429b8, #715);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 400;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition: all .4s ease-in-out;
+}
+
+.glass-navbar button:hover{
+  background: linear-gradient(245deg, #4429b8, #715);
+}
