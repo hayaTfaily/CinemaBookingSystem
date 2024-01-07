@@ -20,15 +20,15 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  padding: 15px;
+  padding: 5px;  /*hon kenet 15*/
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 87%;  /*hon kenet 80%*/
   margin-top: 20px;
   position: fixed; /* or 'absolute', based on your layout */
-  top: 20px; /* adjust as needed */
+  top: 8px; /* adjust as needed */  /*hon kenet 20px ymkn aw 15px*/
   left: 50%; /* adjust as needed */
   transform: translateX(-50%); /* centers the navbar horizontally */
   z-index: 1000; /* adjust based on other elements */
