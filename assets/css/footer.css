@@ -1,0 +1,102 @@
+:root
+{
+    --black:#0C0B13;
+    --primary1:#1A0554;
+    --primary2:#664EAE;
+    --hover:#E2E9FF;
+    --mixed: linear-gradient(to right, #1A0554, #664EAE);
+}
+
+.footer{
+    background-color: var(--black);
+    padding: 70px 0;
+}
+
+.fcontainer{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 18px;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+.footer-col h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: var(--primary2);
+    height: 2px;
+    width: 50px;
+}
+.fotter-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color:#fff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+    color: #fff;
+    padding-left: 10px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon-container {
+    font-size: 2em;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f4f4f4; /* Background color for the icon container */
+    transition: all 0.3s ease;
+}
+
+.icon-container:hover {
+    background-color: var(--primary2); /* Change background color on hover */
+    color: #fff; /* Change icon color on hover */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on hover */
+}
+
+
+
+/* responsive */
+@media(max-width:767px){
+    .footer-col{
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+@media(max-width:574px){
+    .footer-col{
+        width: 100%;
+    }
+}

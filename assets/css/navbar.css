@@ -2,18 +2,11 @@
 
 :root {
   --light: #f6f6f9;
-  --primary: #7153d5;
-  --light-primary: #9fc3e7;
-  --secondary: #4429b8;
-  --grey: #e2e9ff;
-  --dark-grey: #AAAAAA;
-  --dark: #0c0b13;
-  --danger: #D32F2F;
-  --light-danger: #FECDD3;
-  --warning: #FBC02D;
-  --light-warning: #FFF2C6;
-  --success: #388E3C;
-  --light-success: #BBF7D0;
+  --black:#0C0B13;
+  --primary:#1A0554;
+  --secondary:#664EAE;
+  --grey:#E2E9FF;
+  --mixed: linear-gradient(to right, #1A0554, #664EAE);
 }
 
 .glass-navbar {
@@ -35,7 +28,7 @@
 }
 
 .glass-navbar span{
-  color: var(--primary);
+  color: var(--secondary);
   font-family: 'Vidaloka';
   font-size: 30px; 
   font-weight: bold; 
@@ -70,7 +63,7 @@
   display: block;
   height: 3px;
   width: 0%;
-  background-color: var(--primary);
+  background-color: var(--secondary);
   position: absolute;
   bottom: -3px; /* Adjust this value to align the underline properly */
   transition: all .4s ease-in-out;
@@ -81,7 +74,7 @@
 }
 
 .glass-navbar button{
-  background: linear-gradient(45deg, #4429b8, #715);
+  background: var(--mixed);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -99,5 +92,5 @@
 }
 
 .glass-navbar button:hover{
-  background: linear-gradient(245deg, #4429b8, #715);
+  background:  linear-gradient(to left, #1A0554, #664EAE);;
 }
