@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+:root
+{
+    --black:#0C0B13;
+    --primary1:#1A0554;
+    --primary2:#664EAE;
+    --hover:#E2E9FF;
+    --mixed: linear-gradient(to right, #1A0554, #664EAE);
+}
+*
+{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    background-color: black;
+    color: white;
+}
+.movieInfo
+{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 100px;
+}
+.poster
+{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+.poster img
+{
+    width: 180px;
+    height: 250px;
+}
+.poster .name
+{
+    font-weight: 500;
+    font-size: 20px;
+
+}
+.poster .duration
+{
+    font-size:14px;
+    padding-bottom: 10px;
+    color: rgb(195, 193, 193);
+}
+
+.story {
+    width: 50%;
+    position: relative;
+  }
+
+  .title {
+    display: inline-block;
+    position: relative;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 1px; 
+    background-color:white; 
+  }
+
+  p {
+    margin-top: 10px; 
+    color: rgb(210, 208, 208);
+  }
+.cast 
+{
+    width: 25%;
+    padding-left:5px;
+}
+.cast .person
+{
+    display: flex;
+    flex-direction: row;
+
+}
+.cast img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-bottom: 12px;
+}
+.cast .personname
+{
+    padding-top: 13px;
+    padding-left: 8px;
+    color: rgb(210, 208, 208);
+}
+
+.bookingSection
+{
+    margin-left: 100px;
+    margin-top: 50px;
+   
+}
+.bookingSection h1
+{
+    display: inline-block;
+    position: relative;
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color:white;
+}
+.bookingSection h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 2px; 
+    background-color:white; 
+  }
+  .booknow
+  {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .booknow .forinfo1
+  {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  }
+  .booknow .forinfo2
+  {
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 100px;
+  }
+  .bookingSection input
+  {
+    width: 500px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;
+    margin-bottom: 20px;
+  }
+.forinfo1 select
+{
+    width: 500px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding-left: 20px;
+    margin-bottom: 10px; 
+}
+.forinfo1 p
+{
+    color:rgb(195, 193, 193);
+    font-size: 14px;
+    margin-bottom: 10px; 
+}
+.times
+{
+    display: grid;
+    grid-template-columns: repeat(3,160px);
+    gap: 10px;
+}
+.times div
+{
+    background-color: #664EAE;
+    text-align: center;
+    border-radius: 40px;
+    height: 35px;
+    padding-top: 5px;
+}
+.times div:hover
+{
+    background-color: #8273b1;
+    cursor: pointer;
+}
+#submit
+{
+   width: 200px;
+   height: 40px;
+   border: none;
+   background-color: #664EAE;
+   padding-top: 3px;
+   padding-left: 25px;
+   margin-left: 150px;
+   font: 600;
+   font-size: 20px;
+   cursor: pointer;
+
+}
+#submit:hover
+{
+    background-color: #8273b1;
+    cursor: pointer;
+}
