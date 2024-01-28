@@ -180,25 +180,33 @@ body
     font-size: 14px;
     margin-bottom: 10px; 
 }
-.times
+
+.times ul
 {
+    list-style: none;
     display: grid;
     grid-template-columns: repeat(3,160px);
     gap: 10px;
 }
-.times div
+.times li
 {
     background-color: #664EAE;
     text-align: center;
     border-radius: 40px;
     height: 35px;
     padding-top: 5px;
+    transition: all 0.3s;
 }
-.times div:hover
+.times li:hover
 {
     background-color: #8273b1;
     cursor: pointer;
+    transform: scale(1.1);
 }
+.times li.selected {
+    background-color: var(--primary1);
+    color: white;
+  }
 #submit
 {
    width: 200px;
@@ -217,4 +225,9 @@ body
 {
     background-color: #8273b1;
     cursor: pointer;
+}
+.error
+{
+    color: red;
+    
 }
