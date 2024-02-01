@@ -6,7 +6,7 @@ $day=$_POST['day'];
 $nbpeople=$_POST['nbpeople'];
 if($_POST['time'] && $_POST['day'] && $_POST['nbpeople'] )
 {
-    $query="insert into ticket(userId,nbPeople,movieId,day,hour) values ('1','$nbpeople','1','$day','$time')";
+    $query="insert into ticket(userId,userName,nbPeople,movieId,day,hour) values ('1','haya','$nbpeople','1','$day','$time')";
 
 }
 $result=mysqli_query($con,$query);
