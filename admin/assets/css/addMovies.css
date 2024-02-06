@@ -1,0 +1,106 @@
+.tables{
+    border: 2px solid red;
+}
+
+.table-movies{
+    border: 2px solid blue;
+}
+
+
+#content main .table-movies .head {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+	margin-bottom: 24px;
+}
+#content main .table-movies .head h3 {
+	margin-right: auto;
+	font-size: 24px;
+	font-weight: 600;
+}
+#content main .table-movies .head .bx {
+	cursor: pointer;
+}
+
+#content main .table-movies .head .bx {
+	cursor: pointer;
+}
+
+#content main .table-movies {
+	flex-grow: 1;
+	flex-basis: 500px;
+}
+
+#content main .table-movies{
+    flex: 1;
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent content from wrapping and force divs to stay side by side */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#content main .table-movies table {
+	width: 100%;
+	border-collapse: collapse;
+}
+#content main .table-movies table th {
+	padding-bottom: 12px;
+	font-size: 13px;
+	text-align: left;
+	border-bottom: 1px solid var(--grey);
+}
+#content main .table-movies table td {
+	padding: 16px 0;
+}
+#content main .table-movies table tr td:first-child {
+	display: flex;
+	align-items: center;
+	grid-gap: 12px;
+	padding-left: 6px;
+}
+#content main .table-movies table td img {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+#content main .table-movies table tbody tr:hover {
+	background: var(--grey);
+}
+
+
+#content main .add-movie{
+    border: 2px solid green;
+}
+
+.add-movie form {
+    max-width: 300px; /* Adjust the width as needed */
+    margin: auto;
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+}
+
+.add-movie form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-movie form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.add-movie form input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+}
+
+.add-movie form input[type="submit"]:hover {
+    background-color: #45a049;
+}

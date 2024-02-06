@@ -83,9 +83,9 @@ if ($stmt2) {
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="addMovies.php">
 					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+					<span class="text">Movies</span>
 				</a>
 			</li>
 		</ul>
