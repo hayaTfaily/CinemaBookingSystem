@@ -13,7 +13,10 @@ $result = $con->query($sql);
     <title> Movies </title>
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link rel="stylesheet" href="assets/css/addMovies.css">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Include jQuery -->
 </head>
 <body>
     <!-- SIDEBAR -->
@@ -111,6 +114,9 @@ $result = $con->query($sql);
                                 <th>StartDay</th>
                                 <th>EndDay</th>
                                 <th>Story</th>
+								<th>Category</th>
+								<th>Age Range</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -120,31 +126,72 @@ $result = $con->query($sql);
 
                         // Iterate over the query results and generate table rows
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>
-                                    <td>{$row['name']}</td>
-                                    <td>{$row['imbd']}</td>
-                                    <td>{$row['duration']}</td>
-                                    <td>{$row['startDay']}</td>
-                                    <td>{$row['endDay']}</td>
-                                    <td>{$row['story']}</td>
-                                </tr>";
-                        }
+							?>
+                                <tr>
+                                    <td><?= $row['name'];?></td>
+                                    <td><?= $row['imbd']; ?></td>
+                                    <td><?= $row['duration']; ?></td>
+                                    <td><?= $row['startDay']; ?></td>
+                                    <td><?= $row['endDay']; ?></td>
+                                    <td><?= $row['story']; ?></td>
+									<td><?= $row['categorie']; ?></td>
+                                    <td><?= $row['agetowatch']; ?></td>
+									<td><button>Edit</button>
+                                    <button class="del-btn">Delete</button>
+									</td>
+                                </tr>
+                            <?php }
                         ?>
 						</tbody>
 					</table>
 				</div>
 			<div class="add-movie">
-				<form>
+				<form id="addMovieForm" enctype="multipart/form-data">
+				<h2>Add Movie</h2>
+				<div class="input-row">
+					<div class="input-container">
 					<label>Movie's Name</label>
 					<input type="text" name="title">
+					</div>
+					<div class="input-container">
+					<label>Poster</label>
+					<input name="poster" required="" placeholder="Upload Image" type="file" accept="image/*" class="input">
+					</div>
+				</div>
+				<div class="input-row">
+				    <div class="input-container">
 					<label>IMBD</label>
 					<input type="text" name="imbd">
+				    </div>
+					<div class="input-container">
 					<label>Duration</label>
 					<input type="number" name="duration">
+					</div>
+					<div class="input-container">
+					<label>Story</label>
+					<input type="textarea" name="story">
+					</div>
+				</div>
+				<div class="input-row">
+				    <div class="input-container">
+					<label>Category</label>
+					<input type="text" name="categorie">
+					</div>
+					<div class="input-container">
+					<label>Age To Watch</label>
+					<input type="number" name="agetowatch">
+					</div>
+				</div>
+				<div class="input-row">
+				    <div class="input-container">
 					<label>StartDay</label>
-					<input type="date" name="startdate">
+					<input type="date" name="startday">
+					</div>
+					<div class="input-container">
 					<label>End Day</label>
-					<input type="date" name="enddate">
+					<input type="date" name="endday">
+					</div>
+				</div>
 					<input type="submit" name="submit">
 				</form>
 			</div>
@@ -152,6 +199,65 @@ $result = $con->query($sql);
 		</main>
 		<!-- MAIN -->
     </section>
+	<script>
+    $(document).ready(function () {
+        $('#addMovieForm').submit(function (event) {
+            event.preventDefault(); // Prevent default form submission
+            var formData = $(this).serialize(); // Serialize form data
+            $.ajax({
+                type: 'POST',
+                url: './queryFunction/addMovieFunction.php',
+                data: formData,
+                success: function (response) {
+                    // Append new movie to the table
+                    $('.table-movies table tbody').append(response);
+                    $('#addMovieForm')[0].reset(); // Reset form
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                    // Display an error message to the user
+                    // For example:
+                    alert('An error occurred while adding the movie. Please try again later.');
+                }
+            });
+        });
+    });
+
+	$(document).ready(function () {
+		$(".del-btn").click(function (e) {
+        e.preventDefault(); 
+        deleteAction($(this).closest("tr").find("td:eq(0)").text());
+    });
+	});
+
+	function deleteAction(r) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: './queryFunction/delete_movie.php',
+                type: 'get',
+                data: { id: r },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    });
+}
+
+    </script>
     <script src="assets/js/dashboard.js"></script>
 </body>
 </html>
