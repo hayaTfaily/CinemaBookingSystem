@@ -22,7 +22,14 @@ if(isset($_POST['submit'])){
                 $_SESSION['username'] = $row['username']; 
                 $_SESSION['useremail'] = $row['email']; 
                 $_SESSION['userid'] = $row['id']; 
-                header('location:index.php'); 
+               
+                if(isset($_GET['redirect'])) {
+   
+                    header('Location: ' . $_GET['redirect']);
+                } else {
+                  
+                    header('Location: index.php');
+                }
             } 
         } else {
             $message[] = 'Incorrect email or password!'; 
@@ -30,13 +37,6 @@ if(isset($_POST['submit'])){
     } else {
         $message[] = 'User not found!';
     }
-}
-if(isset($_GET['redirect'])) {
-   
-    header('Location: ' . $_GET['redirect']);
-} else {
-  
-    header('Location: index.php');
 }
 ?>
 

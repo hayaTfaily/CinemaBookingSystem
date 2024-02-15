@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('./config/db.php');
+
 $id=$_GET['id'];
 $userid=$_SESSION['userid'];
 $query="select * from movie where id=".$id;
@@ -33,7 +34,7 @@ while($row = mysqli_fetch_assoc($result)) {
         <div class="poster">
             <span class="name">' . $row["name"] . '</span>
             <span class="duration">' . $row["duration"] . ' mins</span>
-            <img src="images/'.$row["photo"].'" alt="">
+            <img src="./uploads/'.$row["photo"].'" alt="">
         </div>
         <div class="story">
             <span class="title">Story</span>
@@ -46,7 +47,7 @@ while($row = mysqli_fetch_assoc($result)) {
             while($castRow = mysqli_fetch_assoc($result2))
             {
             echo '<div class="person">
-                <img src="images/'.$castRow["photo"].'" alt="">
+                <img src="./uploads/'.$castRow["photo"].'" alt="">
                 <div class="personname">'.$castRow["fname"].' '.$castRow["lname"].'</div>
             </div>';
             }
