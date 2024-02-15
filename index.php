@@ -52,6 +52,10 @@ $result2 = mysqli_query($con, $query2);
               <img src="images/bg5.jfif">
             <div class="content"><p>Discover, book, indulge – cinemagic begins</p></div>
             </div>
+            <div class="swiper-slide slide">
+              <img src="images/wallpaper5.jfif">
+            <div class="content"><p>Discover, book, indulge – cinemagic begins</p></div>
+            </div>
         </div>
         <div class="swiper-pagination"></div>
     </div>

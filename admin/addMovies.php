@@ -81,10 +81,10 @@ $result = $con->query($sql);
                                     <td><?= $row['duration']; ?></td>
                                     <td><?= $row['startDay']; ?></td>
                                     <td><?= $row['endDay']; ?></td>
-                                    <td><?= $row['story']; ?></td>
+                                    <td><?= substr($row['story'], 0, 15); ?></td>
 									<td><?= $row['categorie']; ?></td>
                                     <td><?= $row['agetowatch']; ?></td>
-									<td><?= $row['link']; ?></td>
+									<td><?= substr($row['link'], 0, 15); ?></td>
                                 </tr>
                             <?php }
                         ?>
