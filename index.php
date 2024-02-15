@@ -1,5 +1,20 @@
 <?php
 include("includes/navbar.php");
+require('./config/db.php');
+$currentDate = date("Y-m-d");
+
+// Calculate the date for a week from now
+$weekFromNow = date("Y-m-d", strtotime("+1 week"));
+
+// Query to select movies opening this week
+$query = "SELECT * FROM movie WHERE startDay BETWEEN '$currentDate' AND '$weekFromNow'";
+
+$result = mysqli_query($con, $query);
+
+// Query to select upcoming movies after this week
+$query2 = "SELECT * FROM movie WHERE startDay > '$weekFromNow'";
+$result2 = mysqli_query($con, $query2);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,99 +86,50 @@ include("includes/navbar.php");
 
 <h1> Openning This Week </h1>
 <div class="movies-container">
-
-<div class="movie-card">
-  <img src="images/movie1.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> Lost In Space </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
-
-<div class="movie-card">
-  <img src="images/movie2.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> Avatar </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
-
-<div class="movie-card">
-  <img src="images/movie5.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> Interstellar </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
-
-<div class="movie-card">
-  <img src="images/movie4.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> LaLa Land </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
+<?php if ($result) {
+    // Loop through the results
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Populate movie information into HTML structure
+        echo '<div class="movie-card">';
+        echo '<img src="./uploads/' . $row['photo'] . '" alt="Movie Poster" class="poster">';
+        echo '<div class="content">';
+        echo '<h2>' . $row['name'] . '</h2>';
+        echo '<p>IMDb ' . $row['imbd'] . '/10</p>';
+        echo '</div>';
+        echo '<div class="button">';
+        echo '<a href="movieSingle.php?id=' . $row['id'] . '">Book Ticket</a>';
+        echo '</div>';
+        echo '</div>';
+    }
+} else {
+    echo "Error: " . mysqli_error($con);
+}
+?>
 </div>
 </section>
 <section class="coming-movies">
 
 <h1> Coming Movies </h1>
 <div class="movies-container">
-
-<div class="movie-card">
-  <img src="images/movie1.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> Lost In Space </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
-
-<div class="movie-card">
-  <img src="images/movie2.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> Avatar </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
-
-<div class="movie-card">
-  <img src="images/movie5.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> Interstellar </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
-</div>
-
-<div class="movie-card">
-  <img src="images/movie4.jfif" alt="Movie Poster" class="poster">
-  <div class="content">
-    <h2> LaLa Land </h2>
-    <p> IMDb 7.3/10 </p>
-  </div>
-  <div class="button">
-    <a href=""> Book Ticket </a>
-  </div>
+<?php if ($result2) {
+    // Loop through the results
+    while ($row = mysqli_fetch_assoc($result2)) {
+        // Populate movie information into HTML structure
+        echo '<div class="movie-card">';
+        echo '<img src="./uploads/' . $row['photo'] . '" alt="Movie Poster" class="poster">';
+        echo '<div class="content">';
+        echo '<h2>' . $row['name'] . '</h2>';
+        echo '<p>IMDb ' . $row['imbd'] . '/10</p>';
+        echo '</div>';
+        echo '<div class="button">';
+        echo '<a href="movieSingle.php?id=' . $row['id'] . '">Book Ticket</a>';
+        echo '</div>';
+        echo '</div>';
+    }
+} else {
+    echo "Error: " . mysqli_error($con);
+}
+?>
 </div>
 </div>
 
