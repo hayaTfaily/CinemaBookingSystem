@@ -243,7 +243,7 @@ document.getElementById('form').addEventListener('submit',(e)=>{
               data:formData,
               success:function(){
 					Swal.fire({
-						title: "Appointment Sent!",
+						title: "Ticket Sent!",
 						icon: "success",
 						text: `Ticket on ${document.getElementById('date').value} at ${document.getElementById('time').value} has been added successfully.`,
 						confirmButtonText: "OK"

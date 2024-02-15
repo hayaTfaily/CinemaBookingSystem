@@ -186,6 +186,35 @@ td a
 {
     display: none;
 }
+.txtgrid
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin: 6px;
+}
+.txtgrid select
+{
+    width: 180px;
+    height: 35px;
+    color:var(--dark); 
+    border: 1px solid #ccc; 
+    padding: 8px;
+    border-radius: 4px; 
+    font-size: 16px; 
+    margin: 3px;
+}
+
+.txtgrid div
+{
+    font-size: 17px; 
+    color: #AAAAAA;
+    background-color: #1A0554;
+    width: 95px;
+    text-align: center;
+    margin: 3px;
+    height: 33px;
+    border-radius: 4px; 
+}
 
 /*for responsive*/
 @media(max-width:1115px)
