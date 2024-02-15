@@ -76,6 +76,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    color: #664EAE;
     background-color: #f4f4f4; /* Background color for the icon container */
     transition: all 0.3s ease;
 }

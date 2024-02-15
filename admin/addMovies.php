@@ -47,7 +47,7 @@ $result = $con->query($sql);
             <div class="tables">
 				<div class="table-movies">
 					<div class="head">
-						<h3> Movies </h3>
+						<h1> Movies </h1>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
@@ -81,10 +81,10 @@ $result = $con->query($sql);
                                     <td><?= $row['duration']; ?></td>
                                     <td><?= $row['startDay']; ?></td>
                                     <td><?= $row['endDay']; ?></td>
-                                    <td><?= $row['story']; ?></td>
+                                    <td><?= substr($row['story'], 0, 15); ?></td>
 									<td><?= $row['categorie']; ?></td>
                                     <td><?= $row['agetowatch']; ?></td>
-									<td><?= $row['link']; ?></td>
+									<td><?= substr($row['link'], 0, 15); ?></td>
                                 </tr>
                             <?php }
                         ?>
@@ -93,7 +93,7 @@ $result = $con->query($sql);
 				</div>
 			<div class="add-movie">
 				<form id="addMovieForm" enctype="multipart/form-data">
-				<h2>Add Movie</h2>
+				<h1>Add Movie</h1>
 				<div class="input-row">
 					<div class="input-container">
 					<label>Movie's Name</label>

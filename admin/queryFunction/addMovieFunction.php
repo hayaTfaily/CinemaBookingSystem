@@ -33,19 +33,18 @@ echo json_encode(['success' => $success]);
     if ($result) {
         // If insertion successful, return the newly added movie row
         echo "<tr>
-                <td>$title</td>
-                <td><img src='../../uploads/$uploadedFileName'></td>
-                <td>$imbd</td>
-                <td>$duration</td>
-                <td>$startday</td>
-                <td>$endday</td>
-                <td>$story</td>
-                <td>$categorie</td>
-                <td>$age</td>
-                <td>$link</td>
-            </tr>";
-    }
-
+        <td>$title</td>
+        <td><img src='../../uploads/$uploadedFileName'></td>
+        <td>$imbd</td>
+        <td>$duration</td>
+        <td>$startday</td>
+        <td>$endday</td>
+        <td>" . substr($story, 0, 15) . "</td>
+        <td>$categorie</td>
+        <td>$age</td>
+        <td>" . substr($link, 0, 15) . "</td>
+    </tr>";
+}
 // Close database connection
 mysqli_close($con);
 ?>
