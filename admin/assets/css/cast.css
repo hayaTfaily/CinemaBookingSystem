@@ -1,0 +1,148 @@
+#content main .tables {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+#content main .actors-table,
+#content main .cast-table {
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent content from wrapping and force divs to stay side by side */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#content main .actors-table table,
+#content main .cast-table table {
+    width: 100%;
+    border-collapse: separate;
+    table-layout: fixed; /* Set the table layout to fixed */
+    border-spacing: 10px; /* Adjust as needed for space between columns */
+}
+
+#content main .actors-table table th,
+#content main .actors-table table td ,
+#content main .cast-table table th,
+#content main .cast-table table td {
+    padding: 12px; /* Add padding to table cells */
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+    width: 1%; /* Set a default width for all cells */
+}
+
+#content main .actors-table table td button,
+#content main .cast-table table td button{
+    background: var(--light-blue);
+    width: 46px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: var(--light);
+}
+
+
+#content main .actors-table table td button:hover{
+   background: var(--blue);
+   cursor: pointer;
+}
+
+#content main .actors-table table tr td:first-child,
+#content main .cast-table table tr td:first-child {
+    display: flex;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+    width: 2%;
+}
+
+#content main .actors-table table td img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#content main .add-actor {
+    margin-right: 10px;
+    margin-top: 25px;
+}
+
+#content main .add-actor h2 {
+    margin-bottom: 10px;
+}
+
+.add-actor form {
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    width: 100%;
+}
+
+.add-actor form .input-row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(66, 66, 66, 0.301);
+}
+
+.add-actor form .input-row .input-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-actor form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-actor form .select-movie{
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: 1px solid var(--dark);
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: transparent;
+}
+
+.add-actor form input {
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: 1px solid var(--dark);
+    outline: none;
+    border-bottom: 1px solid gray;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background: transparent;
+}
+
+.add-actor form input[type="submit"] {
+    background-color: var(--light-blue);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    font-weight: 500;
+    text-align: center;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.add-actor form input[type="submit"]:hover {
+    background-color: var(--blue);
+}
