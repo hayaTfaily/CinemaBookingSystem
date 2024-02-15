@@ -1,6 +1,8 @@
 <?php
+session_start();
 require('./config/db.php');
 $id=$_GET['id'];
+$userid=$_SESSION['userid'];
 $query="select * from movie where id=".$id;
 $result=mysqli_query($con,$query);
 $query2="select actors.fname,actors.lname,actors.photo from actors,movie,cast where cast.movieId=movie.id and cast.actorId=actors.id and movie.id=".$id;
@@ -13,6 +15,7 @@ $result2=mysqli_query($con,$query2);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./assets/css/movieSingle.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -54,7 +57,7 @@ while($row = mysqli_fetch_assoc($result)) {
         <div class="booknow">
             <div class="forinfo1">
                 <form id="bookform" action="">
-                    <input type="text" id="name" name="name" placeholder="Your name" value="Haya">
+                    <!-- <input type="hidden" id="name" name="name" placeholder="Your name" value="'.$userid.'" readOnly> -->
                     <br>
                     <select name="selectDay" id="selectDay">
                         <option value="">Select the day you want</option>';
@@ -85,7 +88,7 @@ while($row = mysqli_fetch_assoc($result)) {
                     <div class="error" id="errornb"></div>
                     <br>
                     <div class="forsubmit">
-                        <input type="submit" id="submit" value="Book" name="submit">
+                 <input type="submit" id="submit" value="Book" name="submit">
                     </div>
                  </form>
             </div>
@@ -96,6 +99,7 @@ while($row = mysqli_fetch_assoc($result)) {
     </div>';
 }
 ?>
+
 <script>
     $(document).ready(function() {
     $('#selectDay').change(function() {
@@ -106,10 +110,12 @@ while($row = mysqli_fetch_assoc($result)) {
             method: 'POST',
             data: { selectedDay: selectedDay, movieId: movieId }, 
             success: function(response) {
-                console.log(response);
-                    $('#times ul').append('<li>' + response + '</li>');
-            
-            },
+                $('.times ul').empty();
+            var times = JSON.parse(response); 
+            times.forEach(function(time) {
+                $('.times ul').append('<li>' + time + '</li>');
+            });
+        },
 
             error: function(xhr, status, error) {
                 console.error(error);
@@ -117,11 +123,71 @@ while($row = mysqli_fetch_assoc($result)) {
         });
     });
 });
+$("#bookform").submit(function (e) {
+    e.preventDefault();
+    
+    let nbpeople = $("#nbpeople").val();
+    let selectedTime = $("#times li.selected").text();
+    let selectedDay = $("#selectDay").val();
+
+   
+    $.ajax({
+        method: "GET",
+        url: "functions/checkAuth.php", 
+        success: function(response) {
+            if (response === "authenticated") {
+               
+                if (nbpeople < 5 && nbpeople !== "" && selectedDay !== "" && selectedTime !== "") {
+                    $.ajax({
+                        method:"POST",
+                        url:"functions/addTicket.php",
+                        cache: false,
+                        data:{
+                            name: name, 
+                            nbpeople: nbpeople,
+                            time: selectedTime,
+                            day: selectedDay,
+                        },
+                        success:function(response){
+                            Swal.fire({
+                                title: "Ticket Sent!",
+                                icon: "success",
+                                text: `Ticket on ${selectedDay} at ${selectedTime} has been sent successfully.`,
+                                confirmButtonText: "OK"
+                            }).then(() => {
+                                location.reload();
+                            });
+                        }
+                    });
+                } else {
+                    // Handle validation errors
+                    if (nbpeople > 5) {
+                        $("#errornb").html('<i class="fa-solid fa-circle-exclamation"></i> You should enter a number < 5');
+                    }
+                    if (nbpeople === "") {
+                        $("#errornb").html('<i class="fa-solid fa-circle-exclamation"></i> This field is required < 5');
+                    }
+                    if (!selectedTime) {
+                        $("#errortime").html('<i class="fa-solid fa-circle-exclamation"></i> You should select a time');
+                    }
+                    if (selectedDay === "") {
+                        $("#errorday").html('<i class="fa-solid fa-circle-exclamation"></i> This field is required');
+                    }
+                }
+            } else {
+                var redirectUrl = "login.php?redirect=movieSingle.php?id=<?php echo $id; ?>";
+                window.location.href = redirectUrl;
+            }
+        }
+    });
+});
+
 
 </script>
+<script src="./assets/js/movieSingle.js"></script>
 
 
-   <script src="./assets/js/movieSingle.js"></script>
+ 
     
 </body>
 </html>
