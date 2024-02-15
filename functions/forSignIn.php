@@ -20,7 +20,7 @@ if(isset($email)  && isset($password))
     else
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query2="insert into users(username, email,password) values ('$username', '$email','$hashedPassword')";
+        $query2="insert into users(username, email,password,role) values ('$username', '$email','$hashedPassword',2)";
         $result2=mysqli_query($con,$query2);
     }
 }
