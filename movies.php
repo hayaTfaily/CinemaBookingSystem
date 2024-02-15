@@ -1,3 +1,8 @@
+<?php
+require('./config/db.php');
+$query="select * from movie";
+$result=mysqli_query($con,$query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,111 +36,40 @@
         </div>
     </div>
     <div class="movies">
-        <div class="movie">
+        <?php
+        while($row=mysqli_fetch_assoc($result))
+        {
+            echo '
+            <div class="movie">
             <div class="poster">
-                <img src="images/prideandprejudice.jpg" alt="">
+                <img src="images/'.$row["photo"].'" alt="">
             </div>
             <div class="info">
                 <div class="moviename">
                     <div>
-                    <label for="">Pride and Prejudice</label> <span>16+</span>
+                    <label for="">'.$row['name'].'</label> <span>16+</span>
                     <br>
-                    <span class="duration">120 mins</span> <span class="categorie">Romance</span>
+                    <span class="duration">'.$row["duration"].' mins</span> <span class="categorie">'.$row["categorie"].'</span>
                     </div>
-                    <div>IMBD:8.1</div>
+                    <div>IMBD:'.$row["imbd"].'</div>
                 </div>
                 <div class="story">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique, rem vitae amet fuga provident vel officia atque maiores unde, maxime ut necessitatibus minima rerum nisi obcaecati illo totam facere!</p>
+                    <p>'.$row["story"].'</p>
                 </div>
                 <div class="time">
-                    <button><div>
-                   <label for=""><i class='bx bx-time'></i>From 1 February to 20 February</label>
-                    <label for="">Book Ticket <i class='bx bx-chevron-right'></i></label>
-                    </div></button>
+                    <a href="movieSingle.php?id='.$row["id"].'">
+                        <button><div>
+                        <label for=""><i class="bx bx-time"></i>From '.$row["startDay"].' to '.$row["endDay"].'</label>
+                        <label for="">Book Ticket <i class="bx bx-chevron-right"></i></label>
+                        </div></button>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="movie">
-            <div class="poster">
-                <img src="images/interstellar.jpg" alt="">
-            </div>
-            <div class="info">
-                <div class="moviename">
-                    <div>
-                    <label for="">Interstellar</label> <span>16+</span>
-                    <br>
-                    <span class="duration">180 mins</span> <span class="categorie">Romance</span>
-                    </div>
-                    <div>IMBD:8.1</div>
-                </div>
-                <div class="story">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique, rem vitae amet fuga provident vel officia atque maiores unde, maxime ut necessitatibus minima rerum nisi obcaecati illo totam facere!</p>
-                </div>
-                <div class="time">
-                    <button><div>
-                   <label for=""><i class='bx bx-time'></i>From 1 February to 20 February</label>
-                    <label for="">Book Ticket <i class='bx bx-chevron-right'></i></label>
-                    </div></button>
-                </div>
-            </div>
-        </div>
-        <div class="movie">
-            <div class="poster">
-                <img src="images/prideandprejudice.jpg" alt="">
-            </div>
-            <div class="info">
-                <div class="moviename">
-                    <div>
-                    <label for="">Pride and Prejudice</label> <span>16+</span>
-                    <br>
-                    <span class="duration">120 mins</span> <span class="categorie">Romance</span>
-                    </div>
-                    <div>IMBD:8.1</div>
-                </div>
-                <div class="story">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique, rem vitae amet fuga provident vel officia atque maiores unde, maxime ut necessitatibus minima rerum nisi obcaecati illo totam facere!</p>
-                </div>
-                <div class="time">
-                    <button><div>
-                   <label for=""><i class='bx bx-time'></i>From 1 February to 20 February</label>
-                    <label for="">Book Ticket <i class='bx bx-chevron-right'></i></label>
-                    </div></button>
-                </div>
-            </div>
-        </div>
-        <div class="movie">
-            <div class="poster">
-                <img src="images/interstellar.jpg" alt="">
-            </div>
-            <div class="info">
-                <div class="moviename">
-                    <div>
-                    <label for="">Interstellar</label> <span>16+</span>
-                    <br>
-                    <span class="duration">180 mins</span> <span class="categorie">Romance</span>
-                    </div>
-                    <div>IMBD:8.1</div>
-                </div>
-                <div class="story">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique, rem vitae amet fuga provident vel officia atque maiores unde, maxime ut necessitatibus minima rerum nisi obcaecati illo totam facere!</p>
-                </div>
-                <div class="time">
-                     <button class="timebtn">
-                        <div>
-                            <div class="txt">
-                                <i class='bx bx-time'></i>
-                                <span>From 1 February to 20 February</span>
-                            </div>
-                            <div class="txt">
-                                <span>Book Ticket</span>
-                                <i class='bx bx-chevron-right'></i>
-                            </div>
-                        </div>
-                     </button>
-
-                </div>
-            </div>
-        </div>
+            ';
+        }
+        ?>
+        
         
     </div>
 </body>
