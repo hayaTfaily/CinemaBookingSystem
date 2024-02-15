@@ -109,9 +109,6 @@ while ($row = mysqli_fetch_assoc($result3)) {
 				<i class='bx bxs-bell' ></i>
 				<span class="num">8</span>
 			</a>
-			<a href="#" class="profile">
-				<img src="img/people.png">
-			</a>
 		</nav>
         <main>
         <div class="tables">
@@ -140,7 +137,7 @@ while ($row = mysqli_fetch_assoc($result3)) {
                                 <tr>
                                     <td><?= $row['fname'];?></td>
                                     <td><?= $row['lname']; ?></td>
-                                    <td><?= $row['photo']; ?></td>
+                                    <td><img src="../uploads/<?= $row['photo']; ?>"></td>
                                 </tr>
                             <?php }
                         ?>
@@ -222,25 +219,21 @@ while ($row = mysqli_fetch_assoc($result3)) {
         e.preventDefault();
         
         var formData = new FormData(this);
-        
+        console.log(formData);
         $.ajax({
             url: './queryFunction/add_actor.php',
             type: 'POST',
             data: formData,
+            processData: false,
+            contentType: false, 
+            cache: false,
+            enctype: 'multipart/form-data',
             success: function(response) {
-                // Parse response as JSON if necessary
-                var actorData = JSON.parse(response);
-                
-                // Append actor to actors-table
-                var actorRow = '<tr><td>' + actorData.fname + '</td><td>' + actorData.lname + '</td></tr>';
-                $('.actors-table table tbody').append(actorRow);
-                
-                // Append cast to cast-table
-                var castRow = '<tr><td>' + actorData.movie + '</td><td>' + actorData.fname + " " +actorData.lname +'</td></tr>';
-                $('.cast-table table tbody').append(castRow);
-                
                 
                 $('#addActorForm')[0].reset(); 
+                location.reload();
+
+                console.log(success);
             },
             error: function(xhr, status, error) {
                 // Handle errors

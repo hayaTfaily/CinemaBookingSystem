@@ -92,9 +92,6 @@ $result = $con->query($sql);
 				<i class='bx bxs-bell' ></i>
 				<span class="num">8</span>
 			</a>
-			<a href="#" class="profile">
-				<img src="img/people.png">
-			</a>
 		</nav>
 		<!-- NAVBAR -->
         <main>
@@ -109,6 +106,7 @@ $result = $con->query($sql);
 						<thead>
 							<tr>
 								<th>Title</th>
+								<th>Poster</th>
 								<th>IMDb</th>
                                 <th>Duration</th>
                                 <th>StartDay</th>
@@ -116,7 +114,7 @@ $result = $con->query($sql);
                                 <th>Story</th>
 								<th>Category</th>
 								<th>Age Range</th>
-								<th>Actions</th>
+								<th>Link</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -129,6 +127,7 @@ $result = $con->query($sql);
 							?>
                                 <tr>
                                     <td><?= $row['name'];?></td>
+									<td><img src="../../uploads/<?= $row['photo'] ?>"></td>
                                     <td><?= $row['imbd']; ?></td>
                                     <td><?= $row['duration']; ?></td>
                                     <td><?= $row['startDay']; ?></td>
@@ -136,9 +135,7 @@ $result = $con->query($sql);
                                     <td><?= $row['story']; ?></td>
 									<td><?= $row['categorie']; ?></td>
                                     <td><?= $row['agetowatch']; ?></td>
-									<td><button>Edit</button>
-                                    <button class="del-btn">Delete</button>
-									</td>
+									<td><?= $row['link']; ?></td>
                                 </tr>
                             <?php }
                         ?>
@@ -155,8 +152,8 @@ $result = $con->query($sql);
 					</div>
 					<div class="input-container">
 					<label>Poster</label>
-					<input name="poster" required="" placeholder="Upload Image" type="file" accept="image/*" class="input">
-					</div>
+					<input name="poster" id="poster" required="" placeholder="Upload Image" type="file" accept="image/*" class="input">
+                    </div>
 				</div>
 				<div class="input-row">
 				    <div class="input-container">
@@ -181,6 +178,10 @@ $result = $con->query($sql);
 					<label>Age To Watch</label>
 					<input type="number" name="agetowatch">
 					</div>
+					<div class="input-container">
+					<label>Trailer Link</label>
+					<input type="text" name="link">
+					</div>
 				</div>
 				<div class="input-row">
 				    <div class="input-container">
@@ -203,15 +204,21 @@ $result = $con->query($sql);
     $(document).ready(function () {
         $('#addMovieForm').submit(function (event) {
             event.preventDefault(); // Prevent default form submission
-            var formData = $(this).serialize(); // Serialize form data
+			var formData = new FormData(this); 
+			console.log(formData.get("poster"));
             $.ajax({
                 type: 'POST',
                 url: './queryFunction/addMovieFunction.php',
                 data: formData,
+                processData: false,
+                contentType: false, 
+                cache: false,
+                enctype: 'multipart/form-data',
                 success: function (response) {
                     // Append new movie to the table
                     $('.table-movies table tbody').append(response);
                     $('#addMovieForm')[0].reset(); // Reset form
+					console.log(formData.get("poster"));
                 },
                 error: function (xhr, status, error) {
                     // Handle error
@@ -223,39 +230,6 @@ $result = $con->query($sql);
             });
         });
     });
-
-	$(document).ready(function () {
-		$(".del-btn").click(function (e) {
-        e.preventDefault(); 
-        deleteAction($(this).closest("tr").find("td:eq(0)").text());
-    });
-	});
-
-	function deleteAction(r) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You won\'t be able to revert this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: './queryFunction/delete_movie.php',
-                type: 'get',
-                data: { id: r },
-                success: function (data) {
-                    location.reload();
-                },
-                error: function (jXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-        }
-    });
-}
 
     </script>
     <script src="assets/js/dashboard.js"></script>

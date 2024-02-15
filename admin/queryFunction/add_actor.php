@@ -1,59 +1,73 @@
-<?php 
+<?php
 
 require('../../config/db.php');
 
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$movie = $_POST['movie'];
+$response = array();
 
-// Insert actor into actors table
-$sql = "INSERT INTO actors (fname, lname) VALUES ('$fname', '$lname')";
-$result2 = mysqli_query($con, $sql);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate and sanitize input data
+    $fname = mysqli_real_escape_string($con, $_POST['fname']);
+    $lname = mysqli_real_escape_string($con, $_POST['lname']);
+    $movie = mysqli_real_escape_string($con, $_POST['movie']);
 
-if ($result2) {
-    $actorId = mysqli_insert_id($con);
+    // Check if all required fields are provided
+    if (!empty($fname) && !empty($lname) && !empty($movie) && isset($_FILES['picture'])) {
+        // Handle file upload
+        $uploadDir = '../../uploads/';
+        $uploadedFileName = $_FILES['picture']['name'];
+        $uploadedFilePath = $uploadDir . basename($uploadedFileName);
+        
+        if (move_uploaded_file($_FILES['picture']['tmp_name'], $uploadedFilePath)) {
+            // Insert actor into actors table
+            $sql = "INSERT INTO actors (fname, lname, photo) VALUES ('$fname', '$lname', '$uploadedFileName')";
+            $result = mysqli_query($con, $sql);
 
-    // Get movie ID
-    $sql = "SELECT id FROM movie WHERE name = '$movie'";
-    $result = mysqli_query($con, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $movieId = $row['id'];
+            if ($result) {
+                $actorId = mysqli_insert_id($con);
 
-    // Insert actor ID and movie ID into cast table
-    $sql = "INSERT INTO cast (actorId, movieId) VALUES ('$actorId', '$movieId')";
-    $r = mysqli_query($con, $sql);
+                // Get movie ID
+                $sql = "SELECT id FROM movie WHERE name = '$movie'";
+                $result = mysqli_query($con, $sql);
 
-    if ($r) {
-        // Fetch actor and movie names for response
-        $sql = "SELECT fname, lname FROM actors WHERE id = '$actorId'";
-        $actorResult = mysqli_query($con, $sql);
-        $actorRow = mysqli_fetch_assoc($actorResult);
-        $actorName = $actorRow['fname'] . ' ' . $actorRow['lname'];
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $movieId = $row['id'];
 
-        $sql = "SELECT name FROM movie WHERE id = '$movieId'";
-        $movieResult = mysqli_query($con, $sql);
-        $movieRow = mysqli_fetch_assoc($movieResult);
-        $movieName = $movieRow['name'];
+                    // Insert actor ID and movie ID into cast table
+                    $sql = "INSERT INTO cast (actorId, movieId) VALUES ('$actorId', '$movieId')";
+                    $result = mysqli_query($con, $sql);
 
-        // Prepare response array
-        $response = array(
-            'fname' => $actorRow['fname'],
-            'lname' => $actorRow['lname'],
-            'movie' => $movieName
-        );
-
-        // Encode response array to JSON format
-        $jsonResponse = json_encode($response);
-
-        // Echo JSON response
-        echo $jsonResponse;
+                    if ($result) {
+                        $response['success'] = true;
+                        $response['message'] = 'Actor added successfully.';
+                    } else {
+                        $response['success'] = false;
+                        $response['message'] = 'Failed to add actor to cast.';
+                    }
+                } else {
+                    $response['success'] = false;
+                    $response['message'] = 'Movie not found.';
+                }
+            } else {
+                $response['success'] = false;
+                $response['message'] = 'Failed to add actor to database.';
+            }
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Failed to upload picture.';
+        }
     } else {
-        // Handle database error
-        echo 'error';
+        $response['success'] = false;
+        $response['message'] = 'Missing required fields.';
     }
 } else {
-    // Handle database error
-    echo 'error';
+    $response['success'] = false;
+    $response['message'] = 'Invalid request method.';
 }
 
+// Send JSON response
+header('Content-Type: application/json');
+echo json_encode($response);
+
+mysqli_close($con);
 ?>
