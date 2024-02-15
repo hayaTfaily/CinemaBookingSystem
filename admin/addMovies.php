@@ -47,7 +47,7 @@ $result = $con->query($sql);
             <div class="tables">
 				<div class="table-movies">
 					<div class="head">
-						<h3> Movies </h3>
+						<h1> Movies </h1>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
@@ -93,7 +93,7 @@ $result = $con->query($sql);
 				</div>
 			<div class="add-movie">
 				<form id="addMovieForm" enctype="multipart/form-data">
-				<h2>Add Movie</h2>
+				<h1>Add Movie</h1>
 				<div class="input-row">
 					<div class="input-container">
 					<label>Movie's Name</label>

@@ -57,7 +57,7 @@ while ($row = mysqli_fetch_assoc($result3)) {
         <div class="tables">
             <div class="actors-table">
             <div class="head">
-                <h3> Actors </h3>
+                <h1> Actors </h1>
                 <i class='bx bx-search' ></i>
 			    <i class='bx bx-filter' ></i>
 				</div>
@@ -90,7 +90,7 @@ while ($row = mysqli_fetch_assoc($result3)) {
 
             <div class="cast-table">
             <div class="head">
-                <h3> Movies' Cast </h3>
+                <h1> Movies' Cast </h1>
                 <i class='bx bx-search' ></i>
 			    <i class='bx bx-filter' ></i>
 				</div>
